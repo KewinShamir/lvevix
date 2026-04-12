@@ -19,17 +19,39 @@ body { background: var(--dark-bg); color: var(--pure-white); scroll-behavior: sm
 .highlight-cyan { color: var(--cyan-neon); text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
 .highlight-pink { color: var(--pink-neon); text-shadow: 0 0 10px rgba(255, 0, 127, 0.4); }
 
-#intro-overlay { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease; }
-#intro-video { width: 100%; height: 100%; object-fit: contain; }
+/* --- INTRO COM EFEITO DE PREENCHIMENTO --- */
+#intro-overlay { 
+    position: fixed; inset: 0; background: #000; z-index: 10000; 
+    display: flex; justify-content: center; align-items: center; 
+    transition: opacity 1s ease; overflow: hidden;
+}
+
+/* O vídeo de fundo estica e fica borrado */
+#intro-video-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Estica para preencher tudo */
+    filter: blur(20px) brightness(0.5); /* Desfoque e escurecimento */
+    z-index: 1;
+}
+
+/* O vídeo principal fica por cima, mantendo sua proporção */
+#intro-video { 
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Não corta o vídeo */
+    z-index: 2;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
 
 header { padding: 10px 0; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 2000; border-bottom: 1px solid var(--gray-border); }
 nav { display: flex; justify-content: space-between; align-items: center; }
 .header-logo { height: 50px; transition: 0.3s; }
-
 .nav-links { display: flex; list-style: none; gap: 30px; }
 .nav-links a { color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); }
 .nav-links a:hover { color: var(--cyan-neon); }
-
 .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; z-index: 2100; }
 
 .hero { height: 100vh; display: flex; align-items: center; text-align: center; position: relative; background: url('movie/vitória-vitoria-convento-da-penha-capixaba-espirito-santo-brasil.gif') center/cover no-repeat; padding-top: 80px; overflow: hidden; }
@@ -53,7 +75,6 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .card-btn { display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; opacity: 0; transform: translateY(10px); transition: var(--transition); border: 1px solid; }
 .service-card:hover { transform: translateY(-10px); background: #111; }
 .service-card:hover .card-btn { opacity: 1; transform: translateY(0); }
-
 .service-card.color-cyan:hover { border-color: var(--cyan-neon); box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
 .service-card.color-cyan:hover i, .service-card.color-cyan:hover h3, .service-card.color-cyan .card-btn { color: var(--cyan-neon); border-color: var(--cyan-neon); }
 .service-card.color-pink:hover { border-color: var(--pink-neon); box-shadow: 0 0 20px rgba(255, 0, 127, 0.2); }
